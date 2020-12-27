@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snerble.ServiceHost", "Snerble.ServiceHost\Snerble.ServiceHost.csproj", "{CF9C58E2-80F6-41D2-9A76-59DEB2A588AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF9C58E2-80F6-41D2-9A76-59DEB2A588AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF9C58E2-80F6-41D2-9A76-59DEB2A588AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF9C58E2-80F6-41D2-9A76-59DEB2A588AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF9C58E2-80F6-41D2-9A76-59DEB2A588AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09EFFC48-ECD7-449F-B5CE-BC9058AC9FBA}
+	EndGlobalSection
+EndGlobal
