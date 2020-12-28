@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Snerble.ServiceHost.Extensions
 {
@@ -56,6 +58,18 @@ namespace Snerble.ServiceHost.Extensions
 				services.AddTransient(type);
 
 			return services;
+		}
+
+		/// <summary>
+		/// Invokes the class constructor on all types in <paramref name="assembly"/> with
+		/// the <see cref="InitializeOnStartupAttribute"/>.
+		/// </summary>
+		/// <param name="assembly">The assembly whose types will be used.</param>
+		public static void InitializeTypes(Assembly assembly)
+		{
+			foreach (var type in assembly.GetTypes()
+				.Where(t => Attribute.IsDefined(t, typeof(InitializeOnStartupAttribute))))
+				RuntimeHelpers.RunClassConstructor(type.TypeHandle);
 		}
 	}
 }

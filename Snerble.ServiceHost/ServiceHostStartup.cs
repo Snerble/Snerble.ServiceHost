@@ -79,6 +79,9 @@ namespace Snerble.ServiceHost
 			hostBuilder.ConfigureServices(services =>
 			{
 				var assembly = startup.GetType().Assembly;
+				
+				ServiceCollectionExtensions.InitializeTypes(assembly);
+
 				services.AddSingletonServices(assembly);
 				services.AddScopedServices(assembly);
 				services.AddTransientServices(assembly);
