@@ -10,52 +10,58 @@ namespace Snerble.ServiceHost.Extensions
 	/// Defines extension methods to the <see cref="IServiceCollection"/> interface
 	/// used by the <see cref="ServiceHost"/> library.
 	/// </summary>
-	public static class ServiceCollectionExtensions
+	internal static class ServiceCollectionExtensions
 	{
 		/// <summary>
-		/// Adds services from the specified assembly that inherit from <see cref="IAmSingleton"/>
-		/// to the specified <see cref="IServiceCollection"/>.
+		/// Adds services from the specified assembly with the
+		/// <see cref="SingletonAttribute"/> to the <paramref name="services"/>.
 		/// </summary>
 		/// <returns>The original <see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddSingletonServices(
 			this IServiceCollection services,
 			Assembly assembly)
 		{
-			foreach (var type in assembly.GetTypes()
-				.Where(t => t.IsAssignableTo(typeof(IAmSingleton))))
-				services.AddSingleton(type);
+			foreach (var (type, attr) in from type in assembly.GetTypes()
+										 let attr = type.GetCustomAttribute<SingletonAttribute>()
+										 where attr is not null
+										 select (type, attr))
+				services.AddSingleton(attr.ServiceType ?? type, type);
 
 			return services;
 		}
 
 		/// <summary>
-		/// Adds services from the specified assembly that inherit from <see cref="IAmScoped"/>
-		/// to the specified <see cref="IServiceCollection"/>.
+		/// Adds services from the specified assembly with the
+		/// <see cref="ScopedAttribute"/> to the <paramref name="services"/>.
 		/// </summary>
 		/// <returns>The original <see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddScopedServices(
 			this IServiceCollection services,
 			Assembly assembly)
 		{
-			foreach (var type in assembly.GetTypes()
-				.Where(t => t.IsAssignableTo(typeof(IAmScoped))))
-				services.AddScoped(type);
+			foreach (var (type, attr) in from type in assembly.GetTypes()
+										 let attr = type.GetCustomAttribute<ScopedAttribute>()
+										 where attr is not null
+										 select (type, attr))
+				services.AddScoped(attr.ServiceType ?? type, type);
 
 			return services;
 		}
-		
+
 		/// <summary>
-		/// Adds services from the specified assembly that inherit from <see cref="IAmTransient"/>
-		/// to the specified <see cref="IServiceCollection"/>.
+		/// Adds services from the specified assembly with the
+		/// <see cref="TransientAttribute"/> to the <paramref name="services"/>.
 		/// </summary>
 		/// <returns>The original <see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddTransientServices(
 			this IServiceCollection services,
 			Assembly assembly)
 		{
-			foreach (var type in assembly.GetTypes()
-				.Where(t => t.IsAssignableTo(typeof(IAmTransient))))
-				services.AddTransient(type);
+			foreach (var (type, attr) in from type in assembly.GetTypes()
+										 let attr = type.GetCustomAttribute<TransientAttribute>()
+										 where attr is not null
+										 select (type, attr))
+				services.AddTransient(attr.ServiceType ?? type, type);
 
 			return services;
 		}
