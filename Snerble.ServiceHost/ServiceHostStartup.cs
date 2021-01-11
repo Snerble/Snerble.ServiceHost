@@ -75,6 +75,8 @@ namespace Snerble.ServiceHost
 		/// <returns>The <see cref="IHost"/> instance representing the program.</returns>
 		private static IHost InitializeHost(IHostBuilder hostBuilder, IStartup startup)
 		{
+			hostBuilder.UseServiceProviderFactory(new ServiceProviderFactory());
+
 			// Add services from the startup's assembly using the extension methods
 			hostBuilder.ConfigureServices(services =>
 			{
