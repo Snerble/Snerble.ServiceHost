@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Snerble</Authors>
+    <Description>Provides mechanisms for launching a simple service based application.</Description>
   </PropertyGroup>
 
   <ItemGroup>
